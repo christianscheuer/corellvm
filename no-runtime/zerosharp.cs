@@ -94,7 +94,7 @@ unsafe class Program
 
     static int Main()
     {
-        int hel = 0x006c6548; //"Hel\0"
+        /*int hel = 0x006c6548; //"Hel\0"
         printf(&hel, null);
 
         int lo_ = 0x00206f6c; //"lo \0"
@@ -105,6 +105,7 @@ unsafe class Program
 
         int ld_ = 0x000a646c; //"ld\n\0"
         printf(&ld_, null);
+        */
 
         return 42;
     }
