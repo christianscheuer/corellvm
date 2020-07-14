@@ -23,7 +23,7 @@ namespace System
     public abstract class ValueType { }
     public abstract class Enum : ValueType { }
     public struct Nullable<T> where T : struct { }
-    
+
     public sealed class String { public readonly int Length; }
     public abstract class Array { }
     public abstract class Delegate { }
@@ -88,20 +88,23 @@ namespace Internal.Runtime.CompilerHelpers
 
 unsafe class Program
 {
-    [DllImport("api-ms-win-core-processenvironment-l1-1-0")]
-    static extern IntPtr GetStdHandle(int nStdHandle);
 
-    [DllImport("api-ms-win-core-console-l1-1-0")]
-    static extern IntPtr WriteConsoleW(IntPtr hConsole, void* lpBuffer, int charsToWrite, out int charsWritten, void* reserved);
+    [DllImport("*")]
+    private static unsafe extern int printf(int* str, byte* unused);
 
     static int Main()
     {
-        string hello = "Hello world!";
-        fixed (char* c = hello)
-        {
-            int charsWritten;
-            WriteConsoleW(GetStdHandle(-11), c, hello.Length, out charsWritten, null);
-        }
+        int hel = 0x006c6548; //"Hel\0"
+        printf(&hel, null);
+
+        int lo_ = 0x00206f6c; //"lo \0"
+        printf(&lo_, null);
+
+        int wor = 0x00726f57; //"Wor\0"
+        printf(&wor, null);
+
+        int ld_ = 0x000a646c; //"ld\n\0"
+        printf(&ld_, null);
 
         return 42;
     }
